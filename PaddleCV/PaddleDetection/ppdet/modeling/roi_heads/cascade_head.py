@@ -166,7 +166,6 @@ class CascadeBBoxHead(object):
         boxes_cls_prob_l = []
 
         rcnn_pred = rcnn_pred_list[-1]  # stage 3
-        repreat_num = 1
         repreat_num = 3
         bbox_reg_w = cascade_bbox_reg_weights[-1]
         for i in range(repreat_num):
