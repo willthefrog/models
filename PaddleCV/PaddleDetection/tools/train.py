@@ -207,6 +207,7 @@ def main():
         tb_loss_step = 0
         tb_mAP_step = 0
 
+    train_iter = iter(train_loader)
     for it in range(start_iter, cfg.max_iters):
         start_time = end_time
         end_time = time.time()
@@ -214,7 +215,7 @@ def main():
         time_cost = np.mean(time_stat)
         eta_sec = (cfg.max_iters - it) * time_cost
         eta = str(datetime.timedelta(seconds=int(eta_sec)))
-        feed_data, _ = next(train_loader)
+        feed_data, _ = next(train_iter)
         outs = exe.run(compiled_train_prog, feed=feed_data, fetch_list=train_values)
         stats = {k: np.array(v).mean() for k, v in zip(train_keys, outs[:-1])}
 
